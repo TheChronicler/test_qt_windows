@@ -28,7 +28,7 @@ jobs:
         # Installs the Qt SDK
         uses: jurplel/install-qt-action@v3
         with:
-          #          version: '6.5.1'
+          version: '6.5.1'
           host: 'windows'
           target: 'desktop'
           arch: 'win64_msvc2019_64'
@@ -87,6 +87,15 @@ jobs:
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
+
+      - name: Install Qt
+        # Installs the Qt SDK
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.1'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
 
       - name: Fetch OpenBLAS
         if: matrix.blas == 'ON'
@@ -153,6 +162,15 @@ jobs:
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
+
+      - name: Install Qt
+        # Installs the Qt SDK
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.1'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
         
       - name: Install CUDA Toolkit
         id: cuda-toolkit
