@@ -20,8 +20,8 @@ include_directories(whisper.cpp/)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-#find_package(Qt6 COMPONENTS
-find_package(Qt5 COMPONENTS
+find_package(Qt6 COMPONENTS
+#find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
