@@ -24,6 +24,14 @@ jobs:
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
+      - name: Install Qt
+        # Installs the Qt SDK
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '6.2.6'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
 
       - name: Fetch SDL2 and set SDL2_DIR
         if: matrix.sdl2 == 'ON'
