@@ -4,8 +4,8 @@
 #include <QApplication>
 #include <future>
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_audio.h>
+#include <SDL.h>
+#include <SDL_audio.h>
 #include "common-sdl.h"
 #include <mutex>
 
