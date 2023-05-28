@@ -8,11 +8,9 @@ jobs:
     strategy:
       matrix:
         build: [Release]
-        arch: [Win32, x64]
+        arch: [x64]
         sdl2: [ON]
         include:
-          - arch: Win32
-            s2arc: x86
           - arch: x64
             s2arc: x64
           - sdl2: ON
