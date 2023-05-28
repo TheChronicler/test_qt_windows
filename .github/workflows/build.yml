@@ -66,13 +66,10 @@ jobs:
     strategy:
       matrix:
         build: [Release]
-        arch: [Win32, x64]
+        arch: [x64]
         blas: [ON]
         sdl2: [ON]
         include:
-          - arch: Win32
-            obzip: https://github.com/xianyi/OpenBLAS/releases/download/v0.3.21/OpenBLAS-0.3.21-x86.zip
-            s2arc: x86
           - arch: x64
             obzip: https://github.com/xianyi/OpenBLAS/releases/download/v0.3.21/OpenBLAS-0.3.21-x64.zip
             s2arc: x64
