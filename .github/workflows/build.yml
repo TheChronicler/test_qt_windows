@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Clone
         uses: actions/checkout@v1
+        with:
+          submodules: recursive
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
@@ -61,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: main.exe
-          path: build/bin/test_main.exe
+          path: build/Release/test_main.exe
 
   windows-blas:
     runs-on: windows-latest
@@ -141,7 +143,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: main.exe
-          path: build/bin/test_main.exe
+          path: build/Release/test_main.exe
 
 
           
@@ -210,6 +212,6 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: main.exe
-          path: build/bin/test_main.exe
+          path: build/Release/test_main.exe
 
 
