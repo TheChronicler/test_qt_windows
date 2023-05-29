@@ -32,7 +32,6 @@ jobs:
           arch: 'win64_msvc2019_64'
 
       - name: Fetch SDL2 and set SDL2_DIR
-        if: matrix.sdl2 == 'ON'
         run: |
           C:/msys64/usr/bin/wget.exe -qO sdl2.zip https://github.com/libsdl-org/SDL/releases/download/release-${{ matrix.s2ver }}/SDL2-devel-${{ matrix.s2ver }}-VC.zip
           7z x sdl2.zip
@@ -50,15 +49,19 @@ jobs:
           msbuild ALL_BUILD.vcxproj -t:build -p:configuration=${{ matrix.build }} -p:platform=${{ matrix.arch }}
 
       - name: Copy SDL2.dll
-        if: matrix.sdl2 == 'ON'
         run: copy "$env:SDL2_DIR/../lib/${{ matrix.s2arc }}/SDL2.dll" build/bin/${{ matrix.build }}
 
       - name: Upload binaries
-        if: matrix.sdl2 == 'ON'
         uses: actions/upload-artifact@v1
         with:
           name: whisper-bin-${{ matrix.arch }}
           path: build/bin/${{ matrix.build }}
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v1
+        with:
+          name: main.exe
+          path: build/bin/test_main.exe
 
   windows-blas:
     runs-on: windows-latest
@@ -102,7 +105,6 @@ jobs:
           echo "blasdir=$env:GITHUB_WORKSPACE/blas" >> $env:GITHUB_ENV
 
       - name: Fetch SDL2 and set SDL2_DIR
-        if: matrix.sdl2 == 'ON'
         run: |
           C:/msys64/usr/bin/wget.exe -qO sdl2.zip https://github.com/libsdl-org/SDL/releases/download/release-${{ matrix.s2ver }}/SDL2-devel-${{ matrix.s2ver }}-VC.zip
           7z x sdl2.zip
@@ -126,15 +128,22 @@ jobs:
         run: copy "$env:blasdir/bin/libopenblas.dll" build/bin/${{ matrix.build }}
 
       - name: Copy SDL2.dll
-        if: matrix.sdl2 == 'ON'
         run: copy "$env:SDL2_DIR/../lib/${{ matrix.s2arc }}/SDL2.dll" build/bin/${{ matrix.build }}
 
       - name: Upload binaries
-        if: matrix.blas == 'ON' && matrix.sdl2 == 'ON'
+        if: matrix.blas == 'ON'
         uses: actions/upload-artifact@v1
         with:
           name: whisper-blas-bin-${{ matrix.arch }}
           path: build/bin/${{ matrix.build }}
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v1
+        with:
+          name: main.exe
+          path: build/bin/test_main.exe
+
+
           
   windows-cublas:
     runs-on: windows-latest
@@ -172,7 +181,6 @@ jobs:
         uses: Jimver/cuda-toolkit@v0.2.10
         
       - name: Fetch SDL2 and set SDL2_DIR
-        if: matrix.sdl2 == 'ON'
         run: |
           C:/msys64/usr/bin/wget.exe -qO sdl2.zip https://github.com/libsdl-org/SDL/releases/download/release-${{ matrix.s2ver }}/SDL2-devel-${{ matrix.s2ver }}-VC.zip
           7z x sdl2.zip
@@ -190,12 +198,18 @@ jobs:
           msbuild ALL_BUILD.vcxproj -t:build -p:configuration=${{ matrix.build }} -p:platform=${{ matrix.arch }}
           
       - name: Copy SDL2.dll
-        if: matrix.sdl2 == 'ON'
         run: copy "$env:SDL2_DIR/../lib/${{ matrix.s2arc }}/SDL2.dll" build/bin/${{ matrix.build }}
           
       - name: Upload binaries
-        if: matrix.sdl2 == 'ON'
         uses: actions/upload-artifact@v1
         with:
           name: whisper-cublas-bin-${{ matrix.arch }}
           path: build/bin/${{ matrix.build }}
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v1
+        with:
+          name: main.exe
+          path: build/bin/test_main.exe
+
+
